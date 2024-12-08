@@ -1,10 +1,87 @@
-{% for error in errors %}
-<p>{{error}}</p>
-{% endfor %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">  
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-    <input type="text" name="username" placeholder='Usuario'/>
-    <input type="password" name="password" placeholder='Contraseña'/>
-    <input type="submit" value="login">
-</form>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script defer src="{% static 'users/password_visible.js' %}"></script>
+        <title> Inicio de Sesión | EIVOM </title>
+
+        <script>
+        /*to prevent Firefox FOUC, this must be here*/
+          let FF_FOUC_FIX;
+        </script>
+    </head>
+
+    <body class="bg-zinc-900" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        {% for error in errors %}
+        <p class="text-amber-400 tracking-wide text-sm font-mono">{{error}}</p>
+        {% endfor %}
+        
+        <div class="mt-[40px] mb-[40px] w-11/12 max-w-[200px] mx-auto
+            sm:max-w-[400px] transition-all
+        ">
+            <svg
+                class="
+                    fill-amber-400 drop-shadow-md
+                    "
+                viewBox="0 0 1751 387.82938"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:svg="http://www.w3.org/2000/svg">
+                <path
+                    d="m 1036,386.93363 c -11.5092,-1.22818 -27.2985,-4.74423 -40,-8.90743 C 946.96579,361.95411 906.58821,326.77074 884.02487,280.45565 858.35414,227.76214 858.53472,157.73387 884.47482,105.96214 900.22283,74.531969 920.50375,51.486253 949.25766,32.347766 982.37779,10.303143 1017.6505,0 1060,0 c 27.131,0 50.5114,4.0806982 72.1426,12.591398 65.2402,25.668544 108.5319,79.747933 119.6047,149.408602 2.1138,13.29842 2.3411,47.53387 0.4016,60.5 -13.3777,89.43546 -80.2378,154.24905 -169.6489,164.45616 -10.2842,1.17404 -35.401,1.16187 -46.5,-0.0225 z m 45.9837,-112.96716 c 34.2072,-9.6126 52.8553,-41.60685 50.6891,-86.96647 -0.7387,-15.46838 -4.0296,-29.10068 -9.8849,-40.94755 -8.1459,-16.4814 -23.4025,-28.81788 -41.7879,-33.78985 -10.1703,-2.75035 -33.9266,-2.44376 -44.5,0.57431 -28.7163,8.19681 -46.13848,32.4745 -49.61996,69.14518 -1.91044,20.12281 1.59236,43.06677 8.75172,57.32538 13.00764,25.90604 35.69394,38.43581 67.36824,37.20784 7.4149,-0.28747 14.1584,-1.19289 18.9837,-2.54884 z M 0,195 V 6 H 126.5 253 V 53.5 101 H 186.5 120 v 23 23 h 58.5 58.5 v 45 45 H 178.5 120 v 26 26 H 186.5 253 V 336.5 384 H 126.5 0 Z m 297,0 V 6 H 356.5 416 V 195 384 H 356.5 297 Z m 208.5,1.39016 C 470.85,93.222045 442.3545,8.179121 442.17668,7.4058845 441.90152,6.2094333 451.28852,6 505.18978,6 h 63.33642 l 38.4869,128.48948 C 628.1809,205.1587 645.725,262.98223 646,262.98622 c 0.275,0.004 17.5661,-57.3544 38.42467,-127.46309 C 705.28324,65.414437 722.63689,7.5875183 722.98834,7.0188657 723.42012,6.320234 744.06717,6.0684628 786.65793,6.2424759 L 849.68852,6.5 815.04383,109.5 C 795.98925,166.15 767.4289,251.0875 751.57638,298.25 L 722.75363,384 645.62682,383.98428 568.5,383.96855 Z M 1296,195 V 6 h 72.8192 72.8191 l 39.8139,108.75 c 21.8976,59.8125 40.5415,110.47704 41.4308,112.58786 l 1.617,3.83785 38.903,-108.83785 C 1584.7997,62.477035 1602.9611,11.8125 1603.7616,9.75 L 1605.2172,6 H 1678.1086 1751 v 189 189 h -59.4948 -59.4948 l -0.2552,-92.31109 -0.2552,-92.31108 -28.4827,92.31108 L 1574.5345,384 h -51.2249 -51.2249 l -2.0246,-6.75 c -1.1135,-3.7125 -13.9357,-45.225 -28.4937,-92.25 l -26.4692,-85.5 -0.049,92.25 -0.049,92.25 h -59.5 -59.5 V 195 Z"
+                />
+            </svg>
+        </div>
+        
+        <div class="
+        bg-zinc-800 w-11/12 max-w-[500px] min-w-[250px] px-[30px] py-[40px] rounded-lg shadow-md mx-auto border-2 border-zinc-50 relative overflow-hidden
+        sm:overflow-visible
+        ">
+            <img class="absolute w-[200px] bottom-[-50px] right-[-20px]" src="{% static 'users/film.png' %}" alt="film decoration">
+            <h1 class="tracking-wide text-xl font-mono text-amber-400 font-black">Inicio de sesión</h1>
+            <form method="post" action="{% url 'login' %}" class="mt-[30px] flex flex-col gap-y-[30px]">
+                {% csrf_token %}
+                <div class="flex flex-col gap-y-[5px]">
+                    <label class="
+                        text-zinc-50 tracking-wide text-sm font-mono
+                        " for="username">Usuario :</label>
+                    <input id="username" class="
+                        rounded-lg text-amber-400 bg-zinc-900 py-[10px] px-[15px] outline-none border-2 border-zinc-50 font-mono
+                        focus:border-amber-400
+                        " type="text" name="username" placeholder="..." spellcheck="false" required />
+                </div>
+                <div class="flex flex-row relative">
+                    <div class="flex flex-col gap-y-[5px] w-full">
+                    <label class="
+                        text-zinc-50  tracking-wide text-sm font-mono
+                        " for="password">Contraseña :</label>
+                    <input id="password" class="
+                        rounded-lg text-amber-400 bg-zinc-900 py-[10px] px-[15px] outline-none border-2 border-zinc-50 font-mono
+                        focus:border-amber-400
+                        " type="password" name="password" placeholder="..." spellcheck="false" required />
+                    </div>
+                    <div id="pass-visible-toggler" class="
+                    rounded-lg bg-amber-400 mx-auto py-[10px] px-[15px]
+                    drop-shadow-md h-[35px] w-[35px] absolute bottom-[7px] right-[6px] cursor-pointer
+                    hover:bg-amber-300
+                    ">
+                        <svg
+                            id="pass-visible-icon" class="fill-zinc-900 ml-[-8px] mt-[-3px]" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                            <path d="m644-428-58-58q9-47-27-88t-93-32l-58-58q17-8 34.5-12t37.5-4q75 0 127.5 52.5T660-500q0 20-4 37.5T644-428Zm128 126-58-56q38-29 67.5-63.5T832-500q-50-101-143.5-160.5T480-720q-29 0-57 4t-55 12l-62-62q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302Zm20 246L624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM222-624q-29 26-53 57t-41 67q50 101 143.5 160.5T480-280q20 0 39-2.5t39-5.5l-36-38q-11 3-21 4.5t-21 1.5q-75 0-127.5-52.5T300-500q0-11 1.5-21t4.5-21l-84-82Zm319 93Zm-151 75Z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-y-[5px]">
+                    <input class="
+                        rounded-lg bg-amber-400 text-zinc-900 w-max mx-auto py-[10px] px-[15px]
+                        font-bold tracking-tight drop-shadow-md cursor-pointer font-mono
+                        hover:bg-amber-300
+                        " type="submit" value="Iniciar Sesion" />
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

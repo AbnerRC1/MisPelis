@@ -1,0 +1,32 @@
+{% extends "movies/base.html" %}
+
+{% block content %}
+
+<div class="container mx-auto px-5 py-2 transition-all pb-12 lg:px-32 lg:pt-12">
+  <div id="movies-container" class="-m-1 flex flex-wrap md:-m-2">
+    {% for movie in movies %}  
+    <a href="/movies/{{movie.id}}" class="flex w-1/2 flex-wrap mt-3 transition-all border-2 border-amber-400 rounded-lg shadow-lg
+            hover:scale-[1.02] sm:w-1/3 md:w-1/4">
+      <div class="w-full">
+        <img
+          class="block h-full w-full rounded-lg object-cover object-center saturate-0 transition-all hover:saturate-100"
+          src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" alt="{{movie.title}}" />
+      </div>
+      <div class="w-full mb-1">
+        <p class="overflow-hidden text-ellipsis text-zinc-900 bg-amber-400 w-full mx-auto font-bold pl-2 font-mono">{{movie.title|truncatechars_html:40}}</p>
+        <p href="#" class="block pl-2">
+                        <span class="text-amber-400 text-sm font-thin font-mono">{{movie.release_date}}</span></p>
+      </div>
+    </a>
+    {% endfor %} 
+  </div>
+  <button class="flex w-48 mt-10 justify-center mx-auto rounded-lg
+              bg-amber-400 px-3 py-1.5 text-sm font-bold leading-6 font-mono text-zinc-900
+              shadow-sm hover:bg-amber-300 focus-visible:outline
+              focus-visible:outline-2 focus-visible:outline-offset-2
+              focus-visible:outline-zinc-900"
+        hx-get="/movies/random" hx-target="#EIVOM-container" hx-swap="beforeend"
+    >Get More Movies</button>
+
+</div>
+{% endblock content %}

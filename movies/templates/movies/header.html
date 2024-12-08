@@ -1,0 +1,91 @@
+{% load static %}
+<nav class="bg-zinc-800 shadow">
+        <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+          <div class="flex h-16 justify-between">
+            <div class="flex px-2 lg:px-0">
+              <div class="flex flex-shrink-0 items-center w-[100px]">
+                <svg
+                    class="
+                        fill-amber-400 drop-shadow-md
+                        "
+                    viewBox="0 0 1751 387.82938"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:svg="http://www.w3.org/2000/svg">
+                    <path
+                        d="m 1036,386.93363 c -11.5092,-1.22818 -27.2985,-4.74423 -40,-8.90743 C 946.96579,361.95411 906.58821,326.77074 884.02487,280.45565 858.35414,227.76214 858.53472,157.73387 884.47482,105.96214 900.22283,74.531969 920.50375,51.486253 949.25766,32.347766 982.37779,10.303143 1017.6505,0 1060,0 c 27.131,0 50.5114,4.0806982 72.1426,12.591398 65.2402,25.668544 108.5319,79.747933 119.6047,149.408602 2.1138,13.29842 2.3411,47.53387 0.4016,60.5 -13.3777,89.43546 -80.2378,154.24905 -169.6489,164.45616 -10.2842,1.17404 -35.401,1.16187 -46.5,-0.0225 z m 45.9837,-112.96716 c 34.2072,-9.6126 52.8553,-41.60685 50.6891,-86.96647 -0.7387,-15.46838 -4.0296,-29.10068 -9.8849,-40.94755 -8.1459,-16.4814 -23.4025,-28.81788 -41.7879,-33.78985 -10.1703,-2.75035 -33.9266,-2.44376 -44.5,0.57431 -28.7163,8.19681 -46.13848,32.4745 -49.61996,69.14518 -1.91044,20.12281 1.59236,43.06677 8.75172,57.32538 13.00764,25.90604 35.69394,38.43581 67.36824,37.20784 7.4149,-0.28747 14.1584,-1.19289 18.9837,-2.54884 z M 0,195 V 6 H 126.5 253 V 53.5 101 H 186.5 120 v 23 23 h 58.5 58.5 v 45 45 H 178.5 120 v 26 26 H 186.5 253 V 336.5 384 H 126.5 0 Z m 297,0 V 6 H 356.5 416 V 195 384 H 356.5 297 Z m 208.5,1.39016 C 470.85,93.222045 442.3545,8.179121 442.17668,7.4058845 441.90152,6.2094333 451.28852,6 505.18978,6 h 63.33642 l 38.4869,128.48948 C 628.1809,205.1587 645.725,262.98223 646,262.98622 c 0.275,0.004 17.5661,-57.3544 38.42467,-127.46309 C 705.28324,65.414437 722.63689,7.5875183 722.98834,7.0188657 723.42012,6.320234 744.06717,6.0684628 786.65793,6.2424759 L 849.68852,6.5 815.04383,109.5 C 795.98925,166.15 767.4289,251.0875 751.57638,298.25 L 722.75363,384 645.62682,383.98428 568.5,383.96855 Z M 1296,195 V 6 h 72.8192 72.8191 l 39.8139,108.75 c 21.8976,59.8125 40.5415,110.47704 41.4308,112.58786 l 1.617,3.83785 38.903,-108.83785 C 1584.7997,62.477035 1602.9611,11.8125 1603.7616,9.75 L 1605.2172,6 H 1678.1086 1751 v 189 189 h -59.4948 -59.4948 l -0.2552,-92.31109 -0.2552,-92.31108 -28.4827,92.31108 L 1574.5345,384 h -51.2249 -51.2249 l -2.0246,-6.75 c -1.1135,-3.7125 -13.9357,-45.225 -28.4937,-92.25 l -26.4692,-85.5 -0.049,92.25 -0.049,92.25 h -59.5 -59.5 V 195 Z"
+                    />
+                </svg>
+              </div>
+              <div class="hidden lg:ml-6 lg:flex lg:space-x-8">
+          <a href="/" class="inline-flex items-center border-b-2 border-b-amber-400
+                              px-1 pt-1 text-sm font-medium font-mono text-amber-400
+                        {% if request.path == '/' %}
+                        border-amber-400 
+                        {% else %} 
+                        border-transparent
+                        {% endif %}
+                        ">Index</a>
+        {% if user.is_authenticated %}
+          <a href="/collections" class="inline-flex items-center border-b-2
+                              px-1
+                              pt-1 text-sm font-medium text-white hover:border-amber-300 
+                        {% if request.path == '/collections/' %}
+                        border-amber-400 
+                        {% else %} 
+                        border-transparent
+                        {% endif %}
+                        ">Mis Peliculas</a>
+
+        {% endif %}
+        </div>
+      </div>
+      <div class="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
+        <div class="w-full max-w-lg lg:max-w-xs">
+        <form method="get" action="/artworks/search">
+          
+          
+          
+          
+          
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <svg
+                                class="h-5 w-5 text-gray-400 fill-zinc-400" viewBox="0 0 20 20" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+            <input id="search" name="search" class="block w-full rounded-md border-0 bg-zinc-900 py-1.5 pl-10 pr-3 text-zinc-400
+                                        placeholder:text-zinc-400
+                                        sm:text-sm sm:leading-6" placeholder="Buscar" type="search" spellcheck="false"
+                        {% if search_value != None %} 
+                            value="{{ search_value|stringformat:'s' }}"
+                        {% endif %} >
+
+          </div>
+       </form>
+        </div>
+      </div>
+      <div class="hidden lg:ml-4 lg:flex lg:items-center">
+
+
+    {% if user.is_authenticated %}
+        <div class="relative ml-4 flex-shrink-0">
+                <a href="#" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-white font-mono">Hola, {{user.username}}</a>
+        </div>
+        <div class="relative ml-4 flex-shrink-0">
+          <a href="/users/logout" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-amber-400 font-mono">Terminar Sesión</a>
+        </div>
+    {% else %}
+        <div class="relative ml-4 flex-shrink-0">
+          <a href="/accounts/register/" class="inline-flex items-center
+                              px-1 pt-1 text-sm font-medium text-amber-400 font-mono">Regístrate</a>
+        </div>
+        <div class="relative ml-4 flex-shrink-0">
+          <a href="/users/login" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-amber-400 font-mono">Iniciar Sesión</a>
+        </div>
+    {% endif %}
+      </div>
+    </div>
+  </div>
+
+</nav>

@@ -1,0 +1,37 @@
+<div id="modal" _="on closeModal or listChanged remove me" 
+    class="relative z-10" role="dialog" aria-modal="true">
+  <div class="fixed inset-0 hidden bg-zinc-900 bg-opacity-75 transition-opacity md:block"></div>
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+<div class="flex w-full mx-auto transform 
+            text-left text-base transition 
+            md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
+         
+        <div class="relative flex w-full 
+                items-center overflow-hidden bg-zinc-800 rounded-lg  border-2 border-amber-400
+                px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+          
+        <form class="bg-zinc-900 rounded-lg w-full md:col-span-2" hx-post="/movies/movie_review/add/{{movie.id}}/" hx-target="#modal" hx-swap="outerHTML">
+            <div class="px-4 py-3 sm:p-8">
+                <p class="block overflow-hidden
+                        text-ellipsis mb-4 text-amber-400 text-xl font-bold font-mono">Agrega una Reseña</p>
+             <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
+                   <div class="font-mono text-white flex flex-col gap-y-5 sm:col-span-4">
+                            {{movie_review_form}}
+                          
+                            <div class="text-sm font-medium text-amber-400 font-mono">
+                                {{form.description.errors}}
+                            </div>
+                </div>
+            </div>
+         <div class="mt-6 mr-3 flex items-center justify-end gap-x-2">
+            <button type="button"  
+                    _="on click trigger closeModal" 
+                    class="text-sm font-bolc text-amber-400 border-2 border-amber-400 px-3 py-2 rounded-lg font-mono">Cancelar</button>
+            <button type="submit" class="rounded-md bg-amber-400 px-3 py-2 text-sm font-black text-zinc-900 shadow-sm font-mono hover:bg-amber-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900">Guardar</button>
+          </div>
+        </form>
+            </div>
+        </div>
+    </div>
+        </div>
+</div>

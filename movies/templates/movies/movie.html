@@ -1,60 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Página de Ejemplo</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
-    <div class="background-image"></div>
-    
-    <header class="page-header">
-      <h1>My <span>Movies</span></h1>
-    </header>
-    
-    <article>
-      <div class="top-movie">
-        <img class="poster" src="{{movie.poster_path}}" alt="{{movie.title}} poster">
-        <header>
-          <h1 class="movie-title">{{movie.title}}</h1>
-          <div class="movie-info">
-            <p>{{movie.release_date}}</p> 
-            <ul class="movie-genre">
-                {% for g in movie.genres.all %}
-                <li>{{g.name}}</li>
-                {% endfor %}
-            </ul>
-            <p> 1h 53m</p>
+{% extends "movies/base.html" %}
+
+{% block content %}
+<article>
+ <div class="container flex flex-col gap-x-5 mx-auto px-5 py-2 pb-12 pt-12 md:flex-row lg:px-32">
+           <div class="overflow-hidden rounded-lg bg-zinc-800 shadow w-1/2 h-full mx-auto md:w-1/3 mr-auto">
+             <div>
+                 <div class="w-full p-1 md:p-2">
+                   <img
+                     class="block h-full w-full rounded-lg object-cover object-center"
+              src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" alt="{{movie.title}}" />
           </div>
-          <h1 class="decorated-text">Overview</h1>
-          <p>
-              {{movie.overview}}
-          </p>
-          <details>
-            <summary>Production Details</summary>
-            <p class="decorated-text"> Budget: $14,000,000.00 </p>
-            <p class="decorated-text"> Revenue: $233,555,708.00</p>
-          </details>
-        </header>
       </div>
-      <h1>Top Billed Cast</h1>
-      <div class="cast">
-        <div class="cast-item">
-          <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2/fBEucxECxGLKVHBznO0qHtCGiMO.jpg" alt="Benedict Cumberbatch photo">
-          <h1> Benedict Cumberbatch</h1>
-        </div>
-        <div class="cast-item">
-          <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2/bRC1B2VwV0wK3ElciFAK6QZf2wD.jpg" alt="Keira Knightley photo">
-          <h1> Keira Knightley</h1>
-        </div>
+      <div class="bg-zinc-800 px-5">
+                 <div  class="flex flex-col gap-y-2 pb-5 pt-2">
+                   <p class="text-white font-thin font-mono">Data from:</p>
+            <a href="https://www.themoviedb.org/{{artwork.path}}" class="block overflow-hidden
+                        text-ellipsis w-[100px]">
+                        <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="TMDB logo">
+                        </a>
+          </div>
       </div>
-    </article>
-    
-    <footer>
-      <p>Proyecto de ejemplo de la materia Programación Web</p>
-      <p>
-        <a class="decorated-text" href="github.com\miusuario\elrepo"> GitHub Repository</a>
-      </p>
-    </footer>
-  </body>
-</html>
+    </div>
+ <div class="overflow-hidden w-full h-full md:w-2/3">
+    <div class="px-4 py-4 sm:px-6">
+          <div  class="-m-1 mt-1 mb-5">
+            <p class="block overflow-hidden
+                             text-ellipsis text-white text-xl font-bold font-mono">{{movie.title}} ({{movie.release_date|date:"Y"}})</p>
+                  <p class="mt-1 text-zinc-400 text-xs font-thin"> 
+            {% for g in movie.genres.all %} 
+            {{g}} 
+            {% if not forloop.last %}
+            -
+            {% endif %}
+            {%endfor%}</p>
+            <div class="flex flex-row gap-x-5 mt-10">
+            {% if user.is_authenticated %}
+                <a class="border-2 border-amber-400 text-amber-400 rounded-full pl-3 pr-3 text-sm font-bold font-mono"   
+                 hx-get="/movies/movie_review/add/{{movie.id}}" hx-target="body" hx-swap="beforeend"  href="#">Calificar</a> 
+                 <div class="flex flex-row gap-x-2 bg-amber-400 rounded-full pt-0.5 pl-3 pr-3">
+                            <a class="text-zinc-900 text-sm font-bold font-mono" href="#">Me Gusta |</a>
+                            <p class="mt-2text-gray-500 text-sm font-bold font-mono text-zinc-900">{{ movie.likes }}</p>
+                        </div>
+            {% endif %}
+            </div> 
+            
+            <h1 class="mt-5 text-zinc-400 text-base font-semibold font-mono">Overview :</h1>
+            <p class="mt-2 text-zinc-400 text-sm font-normal font-mono">{{ movie.overview }}</p>
+            <p class="mt-5 text-zinc-600 text-sm font-semibold font-mono"> Credits :
+               <p class="mt-2 text-zinc-600 text-sm font-thin font-mono">
+              {% for c in movie.credits.all %} 
+              {{c}} {% if not forloop.last %} - {% endif %}
+              {%endfor%}  
+              </p>
+              <p class="block overflow-hidden mt-6 mb-3
+                               text-ellipsis text-white text-xl font-bold font-mono">Reseñas:</p>
+              <div hx-trigger="listChanged from:body" hx-get="{% url 'movie_reviews' movie.id  %}" hx-target="this" >
+              {% include "movies/reviews.html" %}
+            </div>
+          </div>
+      </div>
+    </div>
+ </div>
+</article>
+
+{% endblock content %}

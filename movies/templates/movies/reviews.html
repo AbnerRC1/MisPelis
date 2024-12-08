@@ -1,0 +1,42 @@
+{% load static %}
+{% for review in movie.moviereview_set.all %} 
+<article class="flex flex-col items-start justify-between pt-4 pb-6">
+  <div class="relative mt-4 flex items-center gap-x-4">
+    <img src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-10 rounded-full bg-zinc-800">
+    <div class="text-sm/6 flex gap-x-3">
+      <p class="font-semibold text-white">
+        <a href="#">
+          <span class="absolute inset-0"></span>
+          {{review.user}}
+        </a>
+      </p>
+      <p class="text-zinc-600">Usuario desde {{review.user.date_joined|date:"M Y"}}</p>
+    </div>
+  </div>
+  
+  
+  
+  <div class="w-full flex flex-col gap-x-5">
+      <div class="flex items-center gap-x-2 text-xs mt-2">
+          <span class="relative z-10 rounded-full bg-amber-400 pl-1 pr-1 font-bold text-base text-zinc-900
+          {% if review.rating < 60 %}
+          bg-red-400 
+          {% else %}
+          bg-green-400
+          {% endif %}">{{review.rating}}</span>
+          <h3 class="text-lg/6 font-semibold text-white">
+              <a href="#">
+                {{review.title}}
+              </a>
+          </h3>
+        </div>
+        <div class="group relative">
+          <p class="mt-1 line-clamp-3 text-sm/6 text-zinc-400 bg-zinc-800 px-3 py-2 mt-3 rounded-lg">
+              {{review.review}}
+          </p>
+        </div>
+  </div>
+</article> 
+{% empty %}
+   <p class="text-zinc-400">No hay reseñas todavía</p>
+{% endfor %}
