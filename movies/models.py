@@ -29,6 +29,7 @@ class Movie(models.Model):
     poster_path = models.URLField(blank = True, null = True)
     genres = models.ManyToManyField(Genre)
     credits = models.ManyToManyField(Person, through = 'MovieCredit')
+    vote_average = models.IntegerField(blank = True, null = True)
     def __str__(self):
         return f'{self.title} ({self.release_date})'
     
@@ -39,6 +40,7 @@ class MovieCredit(models.Model):
     
 class MovieReview(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.CharField(blank = True, null = True)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)])
     review = models.TextField(blank=True)

@@ -2,6 +2,7 @@ import os
 import environ
 import requests
 import psycopg2
+import math
 from  datetime import datetime, date, timezone 
 import sys
 
@@ -98,25 +99,11 @@ def add_movie(movie_id):
               budget,
               tmdb_id,
               revenue,
-              poster_path) values  (%s, %s, %s, %s, %s, %s, %s, %s);'''
+              vote_average,
+              poster_path) values  (%s, %s, %s, %s, %s, %s, %s, %s, %s);'''
 
     movie_tuple = (m['title'], m['overview'], date_time.astimezone(timezone.utc), m['runtime'], 
-                   m['budget'] , movie_id, m['revenue'], m['poster_path'] )
-    print(movie_tuple)
-
-
-    sql = '''INSERT INTO movies_movie 
-             (title,
-              overview,
-              release_date,
-              running_time,
-              budget,
-              tmdb_id,
-              revenue,
-              poster_path) values  (%s, %s, %s, %s, %s, %s, %s, %s);'''
-
-    movie_tuple = (m['title'], m['overview'], date_time.astimezone(timezone.utc), m['runtime'], 
-                   m['budget'] , movie_id, m['revenue'], m['poster_path'] )
+                   m['budget'] , movie_id, m['revenue'], str(math.floor(m['vote_average'] * 10)), m['poster_path'] )
     print(movie_tuple)
     cur.execute(sql, movie_tuple)
 
