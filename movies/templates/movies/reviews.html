@@ -2,7 +2,7 @@
 {% for review in movie.moviereview_set.all|dictsortreversed:"rating" %}
 <article class="flex flex-col items-start justify-between pt-4 pb-6">
   <div class="relative mt-4 flex items-center gap-x-4">
-    <img src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-10 rounded-full bg-zinc-800">
+    <img src="{% static 'users/profile_photo.png' %}" alt="{{user.username}}" class="size-10 rounded-full bg-zinc-800">
     <div class="text-sm/6 flex gap-x-3">
       <p class="font-semibold text-white">
         <a href="#">

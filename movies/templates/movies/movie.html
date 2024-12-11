@@ -38,7 +38,7 @@
                 <a class="border-2 border-amber-400 text-amber-400 rounded-full pl-3 pr-3 text-sm font-bold font-mono"   
                  hx-get="/movies/movie_review/add/{{movie.id}}" hx-target="body" hx-swap="beforeend"  href="#">Calificar</a> 
                  <div class="flex flex-row gap-x-2 bg-amber-400 rounded-full pt-0.5 pl-3 pr-3">
-                            <a class="text-zinc-900 text-sm font-bold font-mono" href="#">Me Gusta |</a>
+                            <a class="text-zinc-900 text-sm font-bold font-mono" href="/movies/like/{{movie.id}}">Me Gusta |</a>
                             <p class="mt-2text-gray-500 text-sm font-bold font-mono text-zinc-900">{{ movie.likes }}</p>
                         </div>
             {% endif %}

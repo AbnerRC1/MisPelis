@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from movies.models import Movie, MovieReview, MovieLike
+from movies.models import Movie, MovieReview
 from movies.forms import MovieReviewForm
 from datetime import date
 
@@ -59,3 +59,9 @@ def about(request):
     
 def add_like(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
+    movie.likes += 1
+    movie.save()
+        
+    review_form = MovieReviewForm()
+    context = { 'movie':movie, 'saludo':'welcome', "review_form":review_form }
+    return render(request,'movies/movie.html', context=context )

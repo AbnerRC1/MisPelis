@@ -30,6 +30,7 @@ class Movie(models.Model):
     genres = models.ManyToManyField(Genre)
     credits = models.ManyToManyField(Person, through = 'MovieCredit')
     vote_average = models.IntegerField(blank = True, null = True)
+    likes = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
     def __str__(self):
         return f'{self.title} ({self.release_date})'
     
@@ -45,6 +46,3 @@ class MovieReview(models.Model):
     rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)])
     review = models.TextField(blank=True)
     title  = models.TextField(blank=False, null=False, default="Reseña sin titulo")
-    
-class MovieLike(models.Model):
-    likes = models.PositiveSmallIntegerField(blank=True, null=True, validators=[MinValueValidator(0)])
