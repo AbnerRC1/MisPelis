@@ -24,24 +24,23 @@
                         {% else %} 
                         border-transparent
                         {% endif %}
-                        ">Index</a>
+                        ">Indice</a>
         {% if user.is_authenticated %}
-          <a href="/collections" class="inline-flex items-center border-b-2
+          <a href="/movies/mymovies/{{user.id}}" class="inline-flex items-center border-b-2
                               px-1
                               pt-1 text-sm font-medium text-white hover:border-amber-300 
-                        {% if request.path == '/collections/' %}
+                        {% if request.path == '/mymovies/' %}
                         border-amber-400 
                         {% else %} 
                         border-transparent
                         {% endif %}
                         ">Mis Peliculas</a>
-
         {% endif %}
         </div>
       </div>
       <div class="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
         <div class="w-full max-w-lg lg:max-w-xs">
-        <form method="get" action="/artworks/search">
+        <form method="get" action="/movies/search">
           
           
           
@@ -76,10 +75,6 @@
           <a href="/users/logout" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-amber-400 font-mono">Terminar Sesión</a>
         </div>
     {% else %}
-        <div class="relative ml-4 flex-shrink-0">
-          <a href="/accounts/register/" class="inline-flex items-center
-                              px-1 pt-1 text-sm font-medium text-amber-400 font-mono">Regístrate</a>
-        </div>
         <div class="relative ml-4 flex-shrink-0">
           <a href="/users/login" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-amber-400 font-mono">Iniciar Sesión</a>
         </div>

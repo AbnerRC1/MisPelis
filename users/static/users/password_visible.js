@@ -9,6 +9,6 @@ const passVisibleIcons = {
 
 passVisibleToggler.addEventListener("click", () => {
     let inputPass = passwordField;
-    inputPass.type = inputPass.type === "password" ? "text" : "password";
-    passVisibleSvg.innerHTML = passVisibleIcons[inputPass.type];
+    inputPass.type = inputPass.type === "password" ? "text" : "password"//si el tipo es contraseña lo hce texto
+    passVisibleSvg.innerHTML = passVisibleIcons[inputPass.type]; // icono
 });

@@ -17,7 +17,8 @@
 
     <body class="bg-zinc-900" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         {% for error in errors %}
-        <p class="text-amber-400 tracking-wide text-sm font-mono">{{error}}</p>
+        <p class="text-amber-400 tracking-wide text-sm font-mono">{{error}}</p><!--si detecta error, lo marca-->
+        
         {% endfor %}
         
         <div class="mt-[40px] mb-[40px] w-11/12 max-w-[200px] mx-auto

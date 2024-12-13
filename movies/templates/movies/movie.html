@@ -1,8 +1,9 @@
 {% extends "movies/base.html" %}
 
+
 {% block content %}
 <article>
- <div class="container flex flex-col gap-x-5 mx-auto px-5 py-2 pb-12 pt-12 md:flex-row lg:px-32">
+ <div class="container flex flex-col gap-x-5 mx-auto px-5 py-2 pt-12 md:flex-row lg:px-32">
            <div class="overflow-hidden rounded-lg bg-zinc-800 shadow w-1/2 h-full mx-auto md:w-1/3 mr-auto">
              <div>
                  <div class="w-full p-1 md:p-2">
@@ -13,8 +14,8 @@
       </div>
       <div class="bg-zinc-800 px-5">
                  <div  class="flex flex-col gap-y-2 pb-5 pt-2">
-                   <p class="text-white font-thin font-mono">Data from:</p>
-            <a href="https://www.themoviedb.org/{{artwork.path}}" class="block overflow-hidden
+                   <p class="text-white font-thin font-mono">Datos de :</p>
+            <a href="https://www.themoviedb.org/{{artwork.path}}" target="_blank" class="block overflow-hidden
                         text-ellipsis w-[100px]">
                         <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="TMDB logo">
                         </a>
@@ -44,16 +45,16 @@
             {% endif %}
             </div> 
             
-            <h1 class="mt-5 text-zinc-400 text-base font-semibold font-mono">Overview :</h1>
+            <h1 class="mt-5 text-zinc-400 text-base font-semibold font-mono">Descripción :</h1>
             <p class="mt-2 text-zinc-400 text-sm font-normal font-mono">{{ movie.overview }}</p>
-            <p class="mt-5 text-zinc-600 text-sm font-semibold font-mono"> Credits :
+            <p class="mt-5 text-zinc-600 text-sm font-semibold font-mono"> Creditos :
                <p class="mt-2 text-zinc-600 text-sm font-thin font-mono">
               {% for c in movie.credits.all %} 
               {{c}} {% if not forloop.last %} - {% endif %}
               {%endfor%}  
               </p>
               <p class="block overflow-hidden mt-6 mb-3
-                               text-ellipsis text-white text-xl font-bold font-mono">Reseñas:</p>
+                               text-ellipsis text-white text-xl font-bold font-mono">Reseñas :</p>
               <div hx-trigger="listChanged from:body" hx-get="{% url 'movie_reviews' movie.id  %}" hx-target="this" >
               {% include "movies/reviews.html" %}
             </div>
@@ -62,5 +63,32 @@
     </div>
  </div>
 </article>
+
+
+
+
+
+
+<section class="container flex flex-col gap-y-2 mx-auto px-5 transition-all pb-12 lg:px-32">
+    <div class="bg-amber-zinc-900 border-2 border-amber-400 flex flex-row justify-between px-5 py-3 rounded-lg">
+        <h1 class="block overflow-hidden text-amber-400 text-xl font-bold font-mono">Recomendaciones :</h1>
+        <button class="rounded-lg bg-amber-400 w-14 h-10
+              shadow-sm hover:bg-amber-200 focus-visible:outline
+              focus-visible:outline-2 focus-visible:outline-offset-2
+              focus-visible:outline-zinc-900"
+            hx-get="/movies/recommended/{{movie.id}}" hx-target="#movies-container" hx-swap="beforeend">
+                <svg
+                    class="fill-zinc-900 scale-[2] mx-auto"
+                    xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M480-360 280-560h400L480-360Z"/>
+                </svg>
+            </button>
+    </div>
+    <div id="movies-container" class="-m-1 flex flex-wrap md:-m-2">
+    </div>
+</section>
+
+
+
+
 
 {% endblock content %}

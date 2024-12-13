@@ -1,5 +1,5 @@
 {% extends "movies/base.html" %}
-
+{% load static %}
 {% block content %}
 
 <div class="container mx-auto px-5 py-2 transition-all pb-12 lg:px-32 lg:pt-12">
@@ -19,15 +19,42 @@
                         <span class="text-amber-400 text-sm font-thin font-mono">{{movie.release_date}}</span></p>
       </div>
     </a>
+    {% empty %}
+       <p class="text-zinc-400">No hay peliculas que presentar</p>
     {% endfor %}
   </div>
+  {% if request.path == '/' %}
   <button class="flex w-48 mt-10 justify-center mx-auto rounded-lg
               bg-amber-400 px-3 py-1.5 text-sm font-bold leading-6 font-mono text-zinc-900
               shadow-sm hover:bg-amber-300 focus-visible:outline
               focus-visible:outline-2 focus-visible:outline-offset-2
               focus-visible:outline-zinc-900"
-        hx-get="/movies/random" hx-target="#EIVOM-container" hx-swap="beforeend"
-    >Get More Movies</button>
+        hx-get="/movies/random" hx-target="#movies-container" hx-swap="beforeend"
+    >Cargar más películas</button>
+  <div class="flex flex-row flex-wrap gap-5">
+    {% for user in users.all %}
+    
+    
+    
+    <div class="relative flex flex-col mt-4 flex items-center gap-x-4 transition-all hover:scale-[1.1]">
+    <img src="{% static 'users/profile_photo.png' %}" alt="{{user.username}}" class="size-10 rounded-full bg-zinc-800">
+    <div class="text-sm/6 flex gap-x-3">
+      <p class="font-semibold text-white">
+        <a href="movies/mymovies/{{user.id}}">
+          <span class="absolute inset-0"></span>
+          {{user}}
+        </a>
+      </p>
+    </div>
+  </div>
+    
+    
+    
+    {% empty %}
+       <p class="text-zinc-400">No hay usuarios por el momento</p>
+    {% endfor %}
+  </div>
+  {% endif %}
 
 </div>
 {% endblock content %}

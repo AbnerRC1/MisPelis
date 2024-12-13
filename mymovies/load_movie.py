@@ -100,10 +100,11 @@ def add_movie(movie_id):
               tmdb_id,
               revenue,
               vote_average,
-              poster_path) values  (%s, %s, %s, %s, %s, %s, %s, %s, %s);'''
+              poster_path,
+              likes) values  (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);'''
 
     movie_tuple = (m['title'], m['overview'], date_time.astimezone(timezone.utc), m['runtime'], 
-                   m['budget'] , movie_id, m['revenue'], str(math.floor(m['vote_average'] * 10)), m['poster_path'] )
+                   m['budget'] , movie_id, m['revenue'], str(math.floor(m['vote_average'] * 10)), m['poster_path'], 0)
     print(movie_tuple)
     cur.execute(sql, movie_tuple)
 
